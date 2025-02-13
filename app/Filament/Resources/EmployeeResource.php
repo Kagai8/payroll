@@ -62,11 +62,22 @@ class EmployeeResource extends Resource
 
             Section::make('Employee Documents')
                 ->schema([
-                    FileUpload::make('id_document')->label('ID Document')->directory('employees/id_docs'),
-                    FileUpload::make('nssf_document')->label('NSSF Document')->directory('employees/nssf'),
-                    FileUpload::make('nhif_document')->label('NHIF Document')->directory('employees/nhif'),
-                    FileUpload::make('passport_photo')->label('Passport Photo')->image()->directory('employees/photos'),
-                    FileUpload::make('birth_certificate')->label('Birth Certificate')->directory('employees/birth_certificates'),
+                    FileUpload::make('id_document')
+                        ->label('ID Document')
+                        ->directory('employees/id_docs'),
+                    FileUpload::make('nssf_document')
+                        ->label('NSSF Document')
+                        ->directory('employees/nssf'),
+                    FileUpload::make('nhif_document')
+                        ->label('NHIF Document')
+                        ->directory('employees/nhif'),
+                    FileUpload::make('passport_photo')
+                        ->label('Passport Photo')
+                        ->image()
+                        ->directory('employees/photos'),
+                    FileUpload::make('birth_certificate')
+                        ->label('Birth Certificate')
+                        ->directory('employees/birth_certificates'),
                 ])->collapsible()->columns(3), // This makes the section collapsible for better UI
             ]);
     }
@@ -75,12 +86,22 @@ class EmployeeResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('first_name')->sortable()->searchable(),
-                TextColumn::make('last_name')->sortable()->searchable(),
-                TextColumn::make('email')->sortable()->searchable(),
-                TextColumn::make('position')->sortable(),
-                TextColumn::make('contract_type')->sortable(),
-                TextColumn::make('basic_salary')->money('USD')->sortable(),
+                TextColumn::make('first_name')
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('last_name')
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('email')
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('position')
+                    ->sortable(),
+                TextColumn::make('contract_type')
+                    ->sortable(),
+                TextColumn::make('basic_salary')
+                    ->money('KES')
+                    ->sortable(),
             ])
             ->filters([
                 //
@@ -91,7 +112,6 @@ class EmployeeResource extends Resource
                     EditAction::make(),
                     DeleteAction::make(),
                 ])
-
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
