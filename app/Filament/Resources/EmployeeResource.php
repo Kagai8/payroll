@@ -5,6 +5,8 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\EmployeeResource\Pages;
 use App\Filament\Resources\EmployeeResource\RelationManagers;
 use App\Models\Employee;
+use App\Models\Salary;
+use Filament\Actions\Action;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
@@ -107,11 +109,14 @@ class EmployeeResource extends Resource
                 //
             ])
             ->actions([
+
                 ActionGroup::make([
                     ViewAction::make(),
                     EditAction::make(),
                     DeleteAction::make(),
+                    
                 ])
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -130,9 +135,11 @@ class EmployeeResource extends Resource
     public static function getPages(): array
     {
         return [
+
             'index' => Pages\ListEmployees::route('/'),
             'create' => Pages\CreateEmployee::route('/create'),
             'edit' => Pages\EditEmployee::route('/{record}/edit'),
+
         ];
     }
 }
