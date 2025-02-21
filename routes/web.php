@@ -19,6 +19,7 @@ Route::middleware('auth')->group(function () {
 
 });
 
-Route::get('/payroll/{salary}/pdf', [PayrollPdfController::class, 'generate'])->name('payroll.pdf');
+Route::get('/payroll/pdf/{id}', [PayrollPdfController::class, 'generatePayslip'])->name('payroll.pdf');
+
 
 require __DIR__.'/auth.php';

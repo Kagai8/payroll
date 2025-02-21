@@ -24,6 +24,7 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
             ->default()
+            ->brandName('EMPLOYMENT MANAGEMENT SYSTEM')
             ->id('admin')
             ->path('admin')
             ->login()

@@ -172,10 +172,11 @@ TextColumn::make('employee.last_name')
                     ViewAction::make(),
                     EditAction::make(),
                     DeleteAction::make(),
-                    Action::make('Download Payroll')
-                    ->icon('heroicon-o-arrow-down-tray')
-                        ->url(fn (Salary $record) => route('payroll.pdf', $record), true)
-                        ->openUrlInNewTab(),
+                    Action::make('Generate Payslip')
+                        ->icon('heroicon-o-folder-arrow-down')
+                        ->url(fn ($record) => route('payroll.pdf', $record->id))
+                        ->openUrlInNewTab()
+                        ->color('primary'),
                 ])
             ])
             ->bulkActions([

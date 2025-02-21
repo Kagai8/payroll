@@ -8,9 +8,15 @@ use Illuminate\Http\Request;
 
 class PayrollPdfController extends Controller
 {
-    public function generate(Salary $salary)
+    public function generatePayslip($salaryId)
     {
-        $pdf = Pdf::loadView('pdf.payroll', ['salary' => $salary]);
-        return $pdf->download('Payroll_' . $salary->id . '.pdf');
+        $salary = Salary::with('employee')->findOrFail($salaryId);
+
+        $extraEarnings = is_array($salary->extra_earnings) ? $salary->extra_earnings : json_decode($salary->extra_earnings, true);
+        $extraDeductions = is_array($salary->extra_deductions) ? $salary->extra_deductions : json_decode($salary->extra_deductions, true);
+
+        $pdf = Pdf::loadView('pdf.payroll', compact('salary', 'extraEarnings', 'extraDeductions'));
+
+        return $pdf->stream('Payslip_' . $salary->employee->first_name . '.pdf');
     }
 }
